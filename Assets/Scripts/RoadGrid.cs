@@ -32,16 +32,10 @@ public class RoadGrid : MonoBehaviour
         CityGrid.name = "CityGrid";
         CityGrid.transform.position = defaultPos;
         CityGrid.transform.rotation = defaultRot;
-        //Instantiate(CityGrid, defaultPos, Quaternion.identity);
         CityGrid.transform.parent = roads.transform;
         
-
-
         GameObject[,] worldGrid;
         worldGrid = new GameObject[gridLength, gridWidth]; //City Grid [x,z] [length,width]
-
-
-
 
         //Place corners
         placeTile(0, 0, new Vector3(0f, 0f, 0f), 0, RoadCorner1);
@@ -52,7 +46,6 @@ public class RoadGrid : MonoBehaviour
         void placeTile(int a, int b, Vector3 pos, int rot, GameObject tile)
         {
             worldGrid[a, b] = tile;
-            //Instantiate(worldGrid[a, b], (defaultPos + pos), Quaternion.Euler(0, rot, 0));
             worldGrid[a, b] = Instantiate(worldGrid[a, b], (defaultPos + pos), Quaternion.Euler(0, rot, 0));
             worldGrid[a, b].transform.parent = CityGrid.transform;
         }
@@ -124,45 +117,32 @@ public class RoadGrid : MonoBehaviour
                     switch (ranNum)
                     {
                         case (0):
-                            worldGrid[a, b] = Tower1;
-                            break;
-                        case (1):
-                            worldGrid[a, b] = Tower2;
-                            break;
-                        case (2):
-                            worldGrid[a, b] = Tower3;
-                            break;
-                        case (3):
-                            worldGrid[a, b] = Tower4;
-                            break;
-                        case (4):
-                            worldGrid[a, b] = Tower6;
-                            break;
-                        default:
-                            worldGrid[a, b] = Grass;
-                            break;
+                        worldGrid[a, b] = Tower1;
+                        break;
+                    case (1):
+                        worldGrid[a, b] = Tower2;
+                        break;
+                    case (2):
+                        worldGrid[a, b] = Tower3;
+                        break;
+                    case (3):
+                        worldGrid[a, b] = Tower4;
+                        break;
+                    case (4):
+                        worldGrid[a, b] = Tower6;
+                        break;
+                    default:
+                        worldGrid[a, b] = Grass;
+                        break;
                     }
+
                     ranNum = Random.Range(0, 4);
                     worldGrid[a, b] = Instantiate(worldGrid[a, b], defaultPos + new Vector3(((float)(10 * b)), 0f, ((float)(10 * a))), Quaternion.Euler(0, (90 * ranNum), 0));
                     worldGrid[a, b].transform.parent = CityGrid.transform;
                 }
-
-                //double for loop space
-
                 worldGrid[a, b].AddComponent<MeshCollider>();
-                
-                //GameObject obj = Resources.Load<GameObject>("Assets/Resources/Models/Roads/RoadCorner1");
-                //Mesh mesh = obj.GetComponent<Mesh>();
-                //worldGrid[a, b].GetComponent<MeshCollider>().sharedMesh = obj.GetComponent<MeshCollider>().sharedMesh;
-
-
-
-
             }
         }
-
-
-
     }
 }
 
